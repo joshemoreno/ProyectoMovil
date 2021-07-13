@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- MainActivity. -->
+    <!-- Font sizes. -->
+    <dimen name="txt_title">40dp</dimen>
+    <dimen name="txt_btn">20dp</dimen>
+
+    <!-- Margins. -->
+    <dimen name="img_margin">130dp</dimen>
+    <dimen name="txt_margin">80dp</dimen>
+    <dimen name="btn_margin">70dp</dimen>
+    <dimen name="btn_margin_button">20dp</dimen>
+
+    <!-- SignUpActivity. -->
+    <!-- Margins. -->
+    <dimen name="img_margin2">100dp</dimen>
+    <dimen name="txt_margin2">40dp</dimen>
+</resources>
