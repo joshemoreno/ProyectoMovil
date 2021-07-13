@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1035510086181",
+    "project_id": "proyectomobil-c0592",
+    "storage_bucket": "proyectomobil-c0592.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1035510086181:android:f459abf2fcd9a642ceddcc",
+        "android_client_info": {
+          "package_name": "com.example.marketplace"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1035510086181-pt43qnl2f6u6cthofdjo8q8aiuv22ddd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVQrSt2j6KywLVGvBpAVuhsWGaFdDfwQk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1035510086181-pt43qnl2f6u6cthofdjo8q8aiuv22ddd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
