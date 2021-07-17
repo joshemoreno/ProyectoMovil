@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -28,6 +29,7 @@ public class SignUpActivity extends AppCompatActivity {
     private Button btn_signUp;
     private Activity mySelf;
     private EditText et_name, et_lastName, et_email, et_password;
+    private CheckBox chk_terms;
     FirebaseAuth mAuth;
     DatabaseReference mDatabase;
     //    Variables
@@ -48,6 +50,7 @@ public class SignUpActivity extends AppCompatActivity {
         et_email = findViewById(R.id.et_email);
         et_password = findViewById(R.id.et_password);
         btn_signUp = findViewById(R.id.btn_signUp2);
+        chk_terms = findViewById(R.id.chk_terms);
 
         btn_signUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +76,9 @@ public class SignUpActivity extends AppCompatActivity {
                 else if (password.length()<6){
                     Toast.makeText(SignUpActivity.this,"The password must be at least 6 characters long",Toast.LENGTH_SHORT).show();
                 }
+                else if (!chk_terms.isChecked()){
+                    Toast.makeText(SignUpActivity.this,"You must accept the terms and conditions",Toast.LENGTH_SHORT).show();
+                }
                 else{
                     registerUser();
                 }
@@ -82,9 +88,9 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void registerUser(){
-        Log.i("text",""+email+password);
+       Log.i("text",""+email+password);
 
-        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        mAuth.createUserWithEmailAndPassword("popayanmorenojose@gmail.com", "12345678").addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
@@ -114,10 +120,10 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
     }
-    public void showTerms(android.view.View view) {
-        Log.e("click","terms");
-
-    }
+//    public void showTerms(android.view.View view) {
+//        Log.e("click","terms");
+//
+//    }
 
 
 }
