@@ -36,7 +36,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(act_signUp);
                 break;
             case R.id.btn_logIn:
-                //Actividad de iniciar sesión
+                Intent act_login = new Intent(mySelf,loginActivity.class);
+                startActivity(act_login);
                 break;
         }
     }
