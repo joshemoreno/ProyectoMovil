@@ -106,7 +106,7 @@ public class SignUpActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task2) {
                             if (task2.isSuccessful()){
-                                Intent act_goHome = new Intent(mySelf,HomeActivity.class);
+                                Intent act_goHome = new Intent(mySelf,MenuActivity.class);
                                 startActivity(act_goHome);
                                 finish();
                             }else{

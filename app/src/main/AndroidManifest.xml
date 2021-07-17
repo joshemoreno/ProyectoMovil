@@ -21,7 +21,6 @@
             android:name=".MenuActivity"
             android:label="@string/title_activity_menu"
             android:theme="@style/Theme.Marketplace.NoActionBar"></activity>
-        <activity android:name=".HomeActivity" />
 
         <activity
             android:name=".SignUpActivity"
