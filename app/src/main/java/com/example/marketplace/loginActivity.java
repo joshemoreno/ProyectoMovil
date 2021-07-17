@@ -2,6 +2,8 @@ package com.example.marketplace;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +14,7 @@ public class loginActivity extends AppCompatActivity {
 
     EditText usuario, clave;
     Button iniciar;
+    private Activity mySelf;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +23,7 @@ public class loginActivity extends AppCompatActivity {
         usuario = findViewById(R.id.txtUsuario);
         clave = findViewById(R.id.txtClave);
         iniciar = findViewById(R.id.btnLogin);
+        mySelf = this;
 
         iniciar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -33,7 +37,8 @@ public class loginActivity extends AppCompatActivity {
         String usu = usuario.getText().toString();
         String password = clave.getText().toString();
         if (usu.equals("Maritza22") && password.equals("M2021")){
-            Toast.makeText(this, "Bienvenido a la App", Toast.LENGTH_SHORT).show();
+            Intent act_goHome = new Intent(mySelf,MenuActivity.class);
+            startActivity(act_goHome);
         }else{
             Toast.makeText(this, "Usuario y/o Clave invalidos", Toast.LENGTH_SHORT).show();
         }
