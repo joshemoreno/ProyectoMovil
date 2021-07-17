@@ -15,7 +15,8 @@
         android:theme="@style/Theme.Marketplace"
         android:usesCleartextTraffic="true">
 
-        <activity android:name=".loginActivity"></activity>
+        <activity android:name=".loginActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
         <activity android:name=".HomeActivity"></activity>
         <activity
             android:name=".MenuActivity"
