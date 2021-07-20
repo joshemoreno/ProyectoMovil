@@ -1,15 +1,16 @@
 package com.example.marketplace;
 
 import android.app.Activity;
-import android.content.ClipData;
-import android.content.Entity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
@@ -18,9 +19,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.marketplace.databinding.ActivityMenuBinding;
-import com.google.android.material.navigation.NavigationBarItemView;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 
 import org.jetbrains.annotations.NotNull;
@@ -41,13 +40,6 @@ public class MenuActivity extends AppCompatActivity {
 
         draView = findViewById(R.id.drawer_layout);
         navView = findViewById(R.id.nav_view);
-//        navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
-//                return false;
-//        FirebaseAuth.getInstance().signOut();
-//            }
-//        });
 
         binding = ActivityMenuBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -56,10 +48,7 @@ public class MenuActivity extends AppCompatActivity {
         binding.appBarMenu.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseAuth.getInstance().signOut();
-                Intent act_goMain = new Intent(mySelf, MainActivity.class);
-                startActivity(act_goMain);
-                finish();
+                Toast.makeText(MenuActivity.this, "Add products", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -74,6 +63,43 @@ public class MenuActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_menu);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.nav_home:
+                        Toast.makeText(MenuActivity.this, "home", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.nav_favorites:
+                        Toast.makeText(MenuActivity.this, "favorites", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.nav_shopping:
+                        Toast.makeText(MenuActivity.this, "shopping", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.signOut:
+                        AlertDialog.Builder builder = new AlertDialog.Builder(mySelf);
+                        builder.setTitle(R.string.logOut);
+                        builder.setMessage(R.string.sure);
+                        builder.setIcon(R.drawable.warning);
+                        builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                FirebaseAuth.getInstance().signOut();
+                                Intent act_goMain = new Intent(mySelf, MainActivity.class);
+                                startActivity(act_goMain);
+                                finish();
+                            }
+                        });
+                        builder.setNegativeButton(R.string.no,null);
+
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+                        break;
+                }
+                return true;
+            }
+        });
+
 
     }
 
