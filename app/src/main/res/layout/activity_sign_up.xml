@@ -32,6 +32,7 @@
             android:src="@drawable/logo"
             android:layout_marginHorizontal="@dimen/img_margin2">
         </ImageView>
+
     </LinearLayout>
 
     <LinearLayout
@@ -103,6 +104,8 @@
             android:textColor="@color/white"
             android:id="@+id/btn_signUp2">
         </Button>
+
     </LinearLayout>
+
 
 </LinearLayout>
