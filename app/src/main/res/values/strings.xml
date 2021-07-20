@@ -23,8 +23,9 @@
     <string name="tv_important">Important to read</string>
     <string name="btn_accept">Accept</string>
     <string name="termsc">Terms and Conditions</string>
-
     <!--genericos-->
+    <string name="slog_in"><u>Log in</u> </string>
+    <string name="ssign_up"><u>Sign up</u></string>
     <string name="btn_ok">Ok</string>
     <string name="warning">Warning</string>
     <string name="loading">Loading...</string>
@@ -39,6 +40,8 @@
     <string name="msg_exist">This user is already registered</string>
     <string name="msg_error">This user could not be registered</string>
     <string name="msg_noExist">This user is not registered</string>
+    <string name="already">Already have an user?</string>
+    <string name="dont_have">Don\'t have an account?</string>
 
 
 <!--    txt terms-->

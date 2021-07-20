@@ -106,6 +106,29 @@
             android:id="@+id/btn_signUp2">
         </Button>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/already"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/blue"
+                android:id="@+id/tv_login"
+                android:clickable="true"
+                android:text="@string/slog_in"
+                android:paddingStart="2dp"
+                android:contextClickable="true"
+                />
+
+        </LinearLayout>
+
     </LinearLayout>
 
 
