@@ -24,6 +24,7 @@
     <string name="btn_accept">Accept</string>
     <string name="termsc">Terms and Conditions</string>
 
+    <!--genericos-->
     <string name="btn_ok">Ok</string>
     <string name="warning">Warning</string>
     <string name="loading">Loading...</string>
@@ -62,4 +63,14 @@ abide by all the rules for the use of this application, which include: </string>
     <string name="btnImageProduct">Upload</string>
     <string name="btn_add">Save</string>
     <string name="btn_cancel">Cancel</string>
+    <string name="msg_info">Success</string>
+    <string name="msg_createProduct">The product was added</string>
+
+    <string name="msg_nameProduct">Please enter a name</string>
+    <string name="msg_descProduct">Please enter a description</string>
+    <string name="msg_countProduct">Please enter a quantity</string>
+    <string name="msg_priceProduct">Please enter a price</string>
+    <string name="msg_imageProduct">Please enter a image</string>
+    <string name="msg_successProduct">The product was created</string>
+
 </resources>
