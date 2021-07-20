@@ -1,4 +1,5 @@
 <resources>
+    <string name="titleAddProduct">Add Products</string>
     <string name="app_name">Marketplace</string>
     <string name="sign_up">Sign up</string>
     <string name="log_in">Log in </string>
@@ -52,4 +53,13 @@ abide by all the rules for the use of this application, which include: </string>
     <string name="menu_favorite">Favorites</string>
     <string name="menu_slideshow">Slideshow</string>
 
+
+    <!--txt product-->
+    <string name="maneProduct">Name</string>
+    <string name="descProduct">description</string>
+    <string name="countProduct">Quantity</string>
+    <string name="priceProduct">Price</string>
+    <string name="btnImageProduct">Upload</string>
+    <string name="btn_add">Save</string>
+    <string name="btn_cancel">Cancel</string>
 </resources>
