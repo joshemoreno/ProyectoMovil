@@ -14,24 +14,29 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class SignUpActivity extends AppCompatActivity {
 
-
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private static final String TAG = "EmailPassword";
     private Button btn_signUp;
     private Activity mySelf;
     private EditText et_name, et_lastName, et_email, et_password;
     private CheckBox chk_terms;
-    FirebaseAuth mAuth;
-    DatabaseReference mDatabase;
+    private FirebaseAuth mAuth;
+
     //    Variables
     private String name="";
     private String lastName="";
@@ -43,7 +48,7 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         mAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mySelf = this;
 
         et_name = findViewById(R.id.et_name);
         et_lastName = findViewById(R.id.et_lastName);
@@ -80,50 +85,43 @@ public class SignUpActivity extends AppCompatActivity {
                     Toast.makeText(SignUpActivity.this,"You must accept the terms and conditions",Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    registerUser();
+                    createAccount(email,password);
                 }
             }
         });
 
     }
 
-    private void registerUser(){
-       Log.i("text",""+email+password);
 
-        mAuth.createUserWithEmailAndPassword("popayanmorenojose@gmail.com", "12345678").addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
+    private void createAccount(String email, String password) {
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
 
-                    Map<String, Object> map = new HashMap<>();
-                    map.put("name",name);
-                    map.put("lastName",lastName);
-                    map.put("email",email);
+                            Map<String, Object> user = new HashMap<>();
+                            user.put("name", name);
+                            user.put("lastName", lastName);
+                            user.put("email", email);
+                            String id = mAuth.getCurrentUser().getUid();
 
-                    String id = mAuth.getCurrentUser().getUid();
-
-                    mDatabase.child("user").child(id).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task2) {
-                            if (task2.isSuccessful()){
-                                Intent act_goHome = new Intent(mySelf,MenuActivity.class);
-                                startActivity(act_goHome);
-                                finish();
-                            }else{
-                                Toast.makeText(SignUpActivity.this,"This user could not be registered_2",Toast.LENGTH_SHORT).show();
-                            }
+                            db.collection("users")
+                                    .add(user)
+                                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                        @Override
+                                        public void onSuccess(DocumentReference documentReference) {
+                                            Intent act_goHome = new Intent(mySelf, MenuActivity.class);
+                                            startActivity(act_goHome);
+                                            finish();
+                                        }
+                                    });
+                        } else if (task.getException() instanceof FirebaseAuthUserCollisionException) {
+                            Toast.makeText(SignUpActivity.this, "This user is already registered", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(SignUpActivity.this, "This user could not be registered", Toast.LENGTH_SHORT).show();
                         }
-                    });
-                }else{
-                    Toast.makeText(SignUpActivity.this,"This user could not be registered_1",Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+                    }
+                });
     }
-//    public void showTerms(android.view.View view) {
-//        Log.e("click","terms");
-//
-//    }
-
-
 }

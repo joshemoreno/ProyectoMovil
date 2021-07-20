@@ -9,11 +9,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button btn_logIn;
     private Button btn_signUp;
     private Activity mySelf;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +31,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         btn_logIn.setOnClickListener(this);
         btn_signUp.setOnClickListener(this);
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            Intent act_goHome = new Intent(mySelf,MenuActivity.class);
+            startActivity(act_goHome);
+            finish();
+        } else {
+            reload();
+        }
+
     }
+
 
     @Override
     public void onClick(View v) {
@@ -40,6 +56,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(act_login);
                 break;
         }
+    }
+
+    private void reload() {
     }
 
 
