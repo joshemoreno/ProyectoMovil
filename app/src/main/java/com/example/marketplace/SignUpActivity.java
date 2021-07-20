@@ -1,6 +1,7 @@
 package com.example.marketplace;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -66,27 +67,45 @@ public class SignUpActivity extends AppCompatActivity {
                 email = et_email.getText().toString().trim();
                 password = et_password.getText().toString().trim();
 
+                AlertDialog.Builder builder = new AlertDialog.Builder(mySelf);
+                builder.setTitle(R.string.warning);
+                builder.setIcon(R.drawable.warning);
+                builder.setPositiveButton(R.string.btn_ok,null);
+
                 if (name.isEmpty()){
-                    Toast.makeText(SignUpActivity.this,"Please enter a name",Toast.LENGTH_SHORT).show();
+                    builder.setMessage(R.string.msg_name);
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
                 }
                 else if (lastName.isEmpty()){
-                    Toast.makeText(SignUpActivity.this,"Please enter a last name",Toast.LENGTH_SHORT).show();
+                    builder.setMessage(R.string.msg_lastname);
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
                 }
                 else if (email.isEmpty()){
-                    Toast.makeText(SignUpActivity.this,"Please enter a email",Toast.LENGTH_SHORT).show();
+                    builder.setMessage(R.string.msg_email);
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
                 }
                 else if (password.isEmpty()){
-                    Toast.makeText(SignUpActivity.this,"Please enter a password",Toast.LENGTH_SHORT).show();
+                    builder.setMessage(R.string.msg_password);
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
                 }
                 else if (password.length()<6){
-                    Toast.makeText(SignUpActivity.this,"The password must be at least 6 characters long",Toast.LENGTH_SHORT).show();
+                    builder.setMessage(R.string.msg_password2);
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
                 }
                 else if (!chk_terms.isChecked()){
-                    Toast.makeText(SignUpActivity.this,"You must accept the terms and conditions",Toast.LENGTH_SHORT).show();
+                    builder.setMessage(R.string.msg_check);
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
                 }
                 else{
                     createAccount(email,password);
                 }
+
             }
         });
 
@@ -98,6 +117,12 @@ public class SignUpActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(mySelf);
+                        builder.setTitle(R.string.warning);
+                        builder.setIcon(R.drawable.warning);
+                        builder.setPositiveButton(R.string.btn_ok,null);
+
                         if (task.isSuccessful()) {
 
                             Map<String, Object> user = new HashMap<>();
@@ -117,10 +142,15 @@ public class SignUpActivity extends AppCompatActivity {
                                         }
                                     });
                         } else if (task.getException() instanceof FirebaseAuthUserCollisionException) {
-                            Toast.makeText(SignUpActivity.this, "This user is already registered", Toast.LENGTH_SHORT).show();
+                            builder.setMessage(R.string.msg_exist);
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
                         } else {
-                            Toast.makeText(SignUpActivity.this, "This user could not be registered", Toast.LENGTH_SHORT).show();
+                            builder.setMessage(R.string.msg_error);
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
                         }
+
                     }
                 });
     }

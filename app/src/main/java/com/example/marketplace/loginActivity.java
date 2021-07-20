@@ -1,6 +1,7 @@
 package com.example.marketplace;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -47,7 +48,24 @@ public class loginActivity extends AppCompatActivity {
                 email = et_email.getText().toString().trim();
                 password = et_password.getText().toString().trim();
 
-                logIn(email,password);
+                AlertDialog.Builder builder = new AlertDialog.Builder(mySelf);
+                builder.setTitle(R.string.warning);
+                builder.setIcon(R.drawable.warning);
+                builder.setPositiveButton(R.string.btn_ok,null);
+
+                if (email.isEmpty()){
+                    builder.setMessage(R.string.msg_email);
+                    androidx.appcompat.app.AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
+                else if (password.isEmpty()){
+                    builder.setMessage(R.string.msg_password);
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }else{
+                    logIn(email,password);
+                }
+
             }
         });
     }
@@ -57,12 +75,20 @@ public class loginActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(mySelf);
+                        builder.setTitle(R.string.warning);
+                        builder.setIcon(R.drawable.warning);
+                        builder.setPositiveButton(R.string.btn_ok,null);
+
                         if (task.isSuccessful()) {
                             Intent act_goHome = new Intent(mySelf,MenuActivity.class);
                             startActivity(act_goHome);
                             finish();
                         } else {
-                            Toast.makeText(loginActivity.this, "This user is not registered", Toast.LENGTH_SHORT).show();
+                            builder.setMessage(R.string.msg_noExist);
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
                         }
                     }
                 });
