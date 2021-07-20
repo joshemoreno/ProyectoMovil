@@ -1,18 +1,17 @@
 package com.example.marketplace;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -20,7 +19,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -37,6 +35,7 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText et_name, et_lastName, et_email, et_password;
     private CheckBox chk_terms;
     private FirebaseAuth mAuth;
+    private TextView tv_terms;
 
     //    Variables
     private String name="";
@@ -57,6 +56,7 @@ public class SignUpActivity extends AppCompatActivity {
         et_password = findViewById(R.id.et_password);
         btn_signUp = findViewById(R.id.btn_signUp2);
         chk_terms = findViewById(R.id.chk_terms);
+        tv_terms = findViewById(R.id.terms);
 
         btn_signUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,6 +106,14 @@ public class SignUpActivity extends AppCompatActivity {
                     createAccount(email,password);
                 }
 
+            }
+        });
+
+        tv_terms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent act_terms = new Intent(mySelf,HomeActivity.class);
+                startActivity(act_terms);
             }
         });
 
