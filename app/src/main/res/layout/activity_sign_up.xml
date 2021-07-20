@@ -89,7 +89,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/terms"
                 android:textColor="@color/blue"
-                android:id="@+id/terms">
+                android:id="@+id/terms"
+                android:clickable="true">
             </TextView>
 
         </LinearLayout>
