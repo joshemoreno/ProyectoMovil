@@ -23,6 +23,7 @@
     <string name="tv_important">Important to read</string>
     <string name="btn_accept">Accept</string>
     <string name="termsc">Terms and Conditions</string>
+    <!--genericos-->
     <string name="slog_in"><u>Log in</u> </string>
     <string name="ssign_up"><u>Sign up</u></string>
     <string name="btn_ok">Ok</string>
@@ -65,4 +66,14 @@ abide by all the rules for the use of this application, which include: </string>
     <string name="btnImageProduct">Upload</string>
     <string name="btn_add">Save</string>
     <string name="btn_cancel">Cancel</string>
+    <string name="msg_info">Success</string>
+    <string name="msg_createProduct">The product was added</string>
+
+    <string name="msg_nameProduct">Please enter a name</string>
+    <string name="msg_descProduct">Please enter a description</string>
+    <string name="msg_countProduct">Please enter a quantity</string>
+    <string name="msg_priceProduct">Please enter a price</string>
+    <string name="msg_imageProduct">Please enter a image</string>
+    <string name="msg_successProduct">The product was created</string>
+
 </resources>
