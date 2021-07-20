@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,6 +30,7 @@ public class MenuActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMenuBinding binding;
     private Activity mySelf;
+    private Button btn_addProduct;
 
     private NavigationView navView;
     private DrawerLayout draView;
@@ -45,10 +47,12 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.appBarMenu.toolbar);
-        binding.appBarMenu.fab.setOnClickListener(new View.OnClickListener() {
+        binding.appBarMenu.btnAddProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MenuActivity.this, "Add products", Toast.LENGTH_SHORT).show();
+                Intent act_goMain = new Intent(mySelf, activity_add_product.class);
+                startActivity(act_goMain);
+                finish();
             }
         });
 
