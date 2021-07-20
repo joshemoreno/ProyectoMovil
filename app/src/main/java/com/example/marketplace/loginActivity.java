@@ -1,46 +1,71 @@
 package com.example.marketplace;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class loginActivity extends AppCompatActivity {
 
-    EditText usuario, clave;
-    Button iniciar;
+    private EditText et_email, et_password;
+    private Button logIn;
     private Activity mySelf;
+    private FirebaseAuth mAuth;
+
+    //variables
+    private String email="";
+    private String password="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        usuario = findViewById(R.id.txtUsuario);
-        clave = findViewById(R.id.txtClave);
-        iniciar = findViewById(R.id.btnLogin);
+        mAuth = FirebaseAuth.getInstance();
         mySelf = this;
 
-        iniciar.setOnClickListener(new View.OnClickListener() {
+        et_email = findViewById(R.id.eTemail);
+        et_password = findViewById(R.id.eTpassword);
+        logIn = findViewById(R.id.btnLogin);
+
+        logIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Validar();
+
+                email = et_email.getText().toString().trim();
+                password = et_password.getText().toString().trim();
+
+                logIn(email,password);
             }
         });
     }
 
-    public void Validar(){
-        String usu = usuario.getText().toString();
-        String password = clave.getText().toString();
-        if (usu.equals("Maritza22") && password.equals("M2021")){
-            Intent act_goHome = new Intent(mySelf,MenuActivity.class);
-            startActivity(act_goHome);
-        }else{
-            Toast.makeText(this, "Usuario y/o Clave invalidos", Toast.LENGTH_SHORT).show();
-        }
+    private void logIn(String email, String password){
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            Intent act_goHome = new Intent(mySelf,MenuActivity.class);
+                            startActivity(act_goHome);
+                            finish();
+                        } else {
+                            Toast.makeText(loginActivity.this, "This user is not registered", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
     }
 }
