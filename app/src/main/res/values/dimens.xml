@@ -3,7 +3,9 @@
     <!-- MainActivity. -->
     <!-- Font sizes. -->
     <dimen name="txt_title">40dp</dimen>
+    <dimen name="txt_subtitle">25dp</dimen>
     <dimen name="txt_btn">20dp</dimen>
+    <dimen name="txt_paragraph">15dp</dimen>
 
     <!-- Margins. -->
     <dimen name="img_margin">130dp</dimen>
@@ -21,4 +23,5 @@
     <dimen name="nav_header_vertical_spacing">8dp</dimen>
     <dimen name="nav_header_height">176dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="txt_margin3">20dp</dimen>
 </resources>
