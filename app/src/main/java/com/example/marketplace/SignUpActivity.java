@@ -35,7 +35,7 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText et_name, et_lastName, et_email, et_password;
     private CheckBox chk_terms;
     private FirebaseAuth mAuth;
-    private TextView tv_terms;
+    private TextView tv_terms, tv_login;
 
     //    Variables
     private String name="";
@@ -57,6 +57,7 @@ public class SignUpActivity extends AppCompatActivity {
         btn_signUp = findViewById(R.id.btn_signUp2);
         chk_terms = findViewById(R.id.chk_terms);
         tv_terms = findViewById(R.id.terms);
+        tv_login = findViewById(R.id.tv_login);
 
         btn_signUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,6 +115,14 @@ public class SignUpActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent act_terms = new Intent(mySelf,HomeActivity.class);
                 startActivity(act_terms);
+            }
+        });
+
+        tv_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent login = new Intent(mySelf, loginActivity.class);
+                startActivity(login);
             }
         });
 

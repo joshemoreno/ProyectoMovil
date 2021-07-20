@@ -1,23 +1,21 @@
 package com.example.marketplace;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class loginActivity extends AppCompatActivity {
 
@@ -25,6 +23,7 @@ public class loginActivity extends AppCompatActivity {
     private Button logIn;
     private Activity mySelf;
     private FirebaseAuth mAuth;
+    private TextView sign_up;
 
     //variables
     private String email="";
@@ -36,7 +35,7 @@ public class loginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         mAuth = FirebaseAuth.getInstance();
         mySelf = this;
-
+        sign_up=findViewById(R.id.tv_sign);
         et_email = findViewById(R.id.eTemail);
         et_password = findViewById(R.id.eTpassword);
         logIn = findViewById(R.id.btnLogin);
@@ -66,6 +65,13 @@ public class loginActivity extends AppCompatActivity {
                     logIn(email,password);
                 }
 
+            }
+        });
+        sign_up.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent sign = new Intent(mySelf, SignUpActivity.class);
+                startActivity(sign);
             }
         });
     }
