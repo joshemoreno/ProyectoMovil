@@ -20,6 +20,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.marketplace.databinding.ActivityMenuBinding;
+import com.google.android.material.navigation.NavigationBarItemView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -30,7 +31,6 @@ public class MenuActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMenuBinding binding;
     private Activity mySelf;
-    private Button btn_addProduct;
 
     private NavigationView navView;
     private DrawerLayout draView;
@@ -69,6 +69,7 @@ public class MenuActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_menu);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {

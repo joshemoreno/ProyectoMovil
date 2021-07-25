@@ -10,13 +10,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,12 +29,16 @@ import java.util.Map;
 public class activity_add_product extends AppCompatActivity {
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    LoadinDialog loadinDialog = new LoadinDialog(activity_add_product.this);
+
+    private FirebaseAuth mAuth;
     private StorageReference mStorage;
     private EditText et_name, et_description, et_quantity, et_price;
     private Button btnSave, btnCancel, btnUpload;
     private ImageView uploadImage;
     private Activity mySelf;
     private Uri globalPath;
+
 
     private String nameProduct = "";
     private String description = "";
@@ -50,6 +51,7 @@ public class activity_add_product extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product);
         mStorage = FirebaseStorage.getInstance().getReference();
+        mAuth = FirebaseAuth.getInstance();
 
         et_name = findViewById(R.id.et_maneProduct);
         et_description = findViewById(R.id.et_descProduct);
@@ -113,6 +115,7 @@ public class activity_add_product extends AppCompatActivity {
                     AlertDialog dialog = builder.create();
                     dialog.show();
                 }else{
+                    loadinDialog.startLoading();
                     createProduct();
                 }
             }
@@ -128,19 +131,22 @@ public class activity_add_product extends AppCompatActivity {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 imagePath = taskSnapshot.getStorage().getName();
+                String id = mAuth.getCurrentUser().getEmail();
 
                 Map<String, Object> product = new HashMap<>();
                 product.put("name", nameProduct);
-                product.put("desciption", description);
+                product.put("description", description);
                 product.put("quantity", quantity);
                 product.put("price", price);
                 product.put("imagePath", imagePath);
+                product.put("user",id);
 
                 db.collection("products")
                         .add(product)
                         .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                             @Override
                             public void onSuccess(DocumentReference documentReference) {
+                                loadinDialog.dismissDialog();
                                 AlertDialog.Builder builder = new AlertDialog.Builder(mySelf);
                                 builder.setTitle(R.string.msg_info);
                                 builder.setMessage(R.string.msg_successProduct);
@@ -164,7 +170,7 @@ public class activity_add_product extends AppCompatActivity {
     private void uploadImages(){
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         intent.setType("image/*");
-        startActivityForResult(intent.createChooser(intent,"Choose a aplication"),10);
+        startActivityForResult(intent.createChooser(intent,"Choose a application"),10);
     }
 
     @Override
