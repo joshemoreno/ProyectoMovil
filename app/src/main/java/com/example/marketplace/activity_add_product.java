@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -44,7 +45,7 @@ public class activity_add_product extends AppCompatActivity {
     private String description = "";
     private String quantity = "";
     private String price = "";
-    private String imagePath = "";
+    private Task<Uri> imagePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,9 +68,9 @@ public class activity_add_product extends AppCompatActivity {
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                finish();
                 Intent act_goHome = new Intent(mySelf, MenuActivity.class);
                 startActivity(act_goHome);
-                finish();
             }
         });
 
@@ -130,7 +131,10 @@ public class activity_add_product extends AppCompatActivity {
         filepath.putFile(globalPath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                imagePath = taskSnapshot.getStorage().getName();
+                imagePath = taskSnapshot.getStorage().getDownloadUrl();
+                while (!imagePath.isSuccessful());
+                Uri downloadUri = imagePath.getResult();
+
                 String id = mAuth.getCurrentUser().getEmail();
 
                 Map<String, Object> product = new HashMap<>();
@@ -138,7 +142,7 @@ public class activity_add_product extends AppCompatActivity {
                 product.put("description", description);
                 product.put("quantity", quantity);
                 product.put("price", price);
-                product.put("imagePath", imagePath);
+                product.put("url", downloadUri.toString());
                 product.put("user",id);
 
                 db.collection("products")
@@ -154,9 +158,9 @@ public class activity_add_product extends AppCompatActivity {
                                 builder.setPositiveButton(R.string.btn_ok, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
+                                        finish();
                                         Intent act_goMenu = new Intent(mySelf, MenuActivity.class);
                                         startActivity(act_goMenu);
-                                        finish();
                                     }
                                 });
                                 AlertDialog dialog = builder.create();

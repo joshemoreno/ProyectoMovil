@@ -156,17 +156,20 @@ public class SignUpActivity extends AppCompatActivity {
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
-                                            loadinDialog.dismissDialog();
                                             Intent act_goHome = new Intent(mySelf, MenuActivity.class);
                                             startActivity(act_goHome);
                                             finish();
+                                            loadinDialog.dismissDialog();
                                         }
                                     });
+
                         } else if (task.getException() instanceof FirebaseAuthUserCollisionException) {
+                            loadinDialog.dismissDialog();
                             builder.setMessage(R.string.msg_exist);
                             AlertDialog dialog = builder.create();
                             dialog.show();
                         } else {
+                            loadinDialog.dismissDialog();
                             builder.setMessage(R.string.msg_error);
                             AlertDialog dialog = builder.create();
                             dialog.show();

@@ -91,10 +91,11 @@ public class loginActivity extends AppCompatActivity {
 
                         if (task.isSuccessful()) {
                             loadinDialog.dismissDialog();
+                            finish();
                             Intent act_goHome = new Intent(mySelf,MenuActivity.class);
                             startActivity(act_goHome);
-                            finish();
                         } else {
+                            loadinDialog.dismissDialog();
                             builder.setMessage(R.string.msg_noExist);
                             AlertDialog dialog = builder.create();
                             dialog.show();
