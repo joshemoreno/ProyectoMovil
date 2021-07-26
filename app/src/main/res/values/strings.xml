@@ -1,4 +1,5 @@
 <resources>
+    <string name="backAlert">Tap again to exit</string>
     <string name="titleAddProduct">Add Products</string>
     <string name="app_name">Marketplace</string>
     <string name="sign_up">Sign up</string>
