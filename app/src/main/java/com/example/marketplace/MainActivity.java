@@ -59,6 +59,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void reload() {
+//        Intent act_goHome = new Intent(mySelf,MainActivity.class);
+//        startActivity(act_goHome);
+//        finish();
     }
 
 

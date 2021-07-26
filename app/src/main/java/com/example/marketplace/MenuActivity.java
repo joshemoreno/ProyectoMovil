@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,6 +21,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.marketplace.databinding.ActivityMenuBinding;
+import com.google.android.material.navigation.NavigationBarItemView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -30,10 +32,10 @@ public class MenuActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMenuBinding binding;
     private Activity mySelf;
-    private Button btn_addProduct;
 
     private NavigationView navView;
     private DrawerLayout draView;
+    private int count=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +54,6 @@ public class MenuActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent act_goMain = new Intent(mySelf, activity_add_product.class);
                 startActivity(act_goMain);
-                finish();
             }
         });
 
@@ -69,6 +70,7 @@ public class MenuActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_menu);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
@@ -90,10 +92,10 @@ public class MenuActivity extends AppCompatActivity {
                         builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                finish();
                                 FirebaseAuth.getInstance().signOut();
                                 Intent act_goMain = new Intent(mySelf, MainActivity.class);
                                 startActivity(act_goMain);
-                                finish();
                             }
                         });
                         builder.setNegativeButton(R.string.no,null);
@@ -121,6 +123,27 @@ public class MenuActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_menu);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(count == 0){
+            Toast.makeText(MenuActivity.this, R.string.backAlert, Toast.LENGTH_SHORT).show();
+            count++;
+        }else{
+            super.onBackPressed();
+        }
+        new CountDownTimer(2000,1000){
+            @Override
+            public void onTick(long millisUntilFinished) {
+
+            }
+            @Override
+            public void onFinish() {
+                count=0;
+            }
+        }.start();
+
     }
 
 

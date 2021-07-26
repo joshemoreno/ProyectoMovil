@@ -24,6 +24,7 @@ public class loginActivity extends AppCompatActivity {
     private Activity mySelf;
     private FirebaseAuth mAuth;
     private TextView sign_up;
+    LoadinDialog loadinDialog = new LoadinDialog(loginActivity.this);
 
     //variables
     private String email="";
@@ -62,6 +63,7 @@ public class loginActivity extends AppCompatActivity {
                     AlertDialog dialog = builder.create();
                     dialog.show();
                 }else{
+                    loadinDialog.startLoading();
                     logIn(email,password);
                 }
 
@@ -88,10 +90,12 @@ public class loginActivity extends AppCompatActivity {
                         builder.setPositiveButton(R.string.btn_ok,null);
 
                         if (task.isSuccessful()) {
+                            loadinDialog.dismissDialog();
+                            finish();
                             Intent act_goHome = new Intent(mySelf,MenuActivity.class);
                             startActivity(act_goHome);
-                            finish();
                         } else {
+                            loadinDialog.dismissDialog();
                             builder.setMessage(R.string.msg_noExist);
                             AlertDialog dialog = builder.create();
                             dialog.show();

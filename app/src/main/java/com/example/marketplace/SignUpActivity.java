@@ -29,6 +29,8 @@ import java.util.Map;
 public class SignUpActivity extends AppCompatActivity {
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    LoadinDialog loadinDialog = new LoadinDialog(SignUpActivity.this);
+
     private static final String TAG = "EmailPassword";
     private Button btn_signUp;
     private Activity mySelf;
@@ -104,6 +106,7 @@ public class SignUpActivity extends AppCompatActivity {
                     dialog.show();
                 }
                 else{
+                    loadinDialog.startLoading();
                     createAccount(email,password);
                 }
 
@@ -146,23 +149,27 @@ public class SignUpActivity extends AppCompatActivity {
                             user.put("name", name);
                             user.put("lastName", lastName);
                             user.put("email", email);
-                            String id = mAuth.getCurrentUser().getUid();
 
                             db.collection("users")
-                                    .add(user)
-                                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                    .document(email)
+                                    .set(user)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
-                                        public void onSuccess(DocumentReference documentReference) {
+                                        public void onSuccess(Void aVoid) {
                                             Intent act_goHome = new Intent(mySelf, MenuActivity.class);
                                             startActivity(act_goHome);
                                             finish();
+                                            loadinDialog.dismissDialog();
                                         }
                                     });
+
                         } else if (task.getException() instanceof FirebaseAuthUserCollisionException) {
+                            loadinDialog.dismissDialog();
                             builder.setMessage(R.string.msg_exist);
                             AlertDialog dialog = builder.create();
                             dialog.show();
                         } else {
+                            loadinDialog.dismissDialog();
                             builder.setMessage(R.string.msg_error);
                             AlertDialog dialog = builder.create();
                             dialog.show();
