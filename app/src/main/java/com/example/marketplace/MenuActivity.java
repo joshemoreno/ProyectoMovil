@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -35,6 +36,8 @@ public class MenuActivity extends AppCompatActivity {
 
     private NavigationView navView;
     private DrawerLayout draView;
+    private TextView tvName;
+    private View hView;
     private int count=0;
 
     @Override
@@ -56,8 +59,6 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(act_goMain);
             }
         });
-
-
 
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
@@ -107,7 +108,6 @@ public class MenuActivity extends AppCompatActivity {
                 return true;
             }
         });
-
 
     }
 

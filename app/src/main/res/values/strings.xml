@@ -45,7 +45,7 @@
     <string name="dont_have">Don\'t have an account?</string>
 
 
-<!--    txt terms-->
+    <!--    txt terms-->
     <string name="first_line">By accepting the terms and conditions presented below, the user agrees to
 abide by all the rules for the use of this application, which include: </string>
     <string name="second_line">Post ONLY true content.</string>
@@ -60,6 +60,8 @@ abide by all the rules for the use of this application, which include: </string>
 
 
     <!--txt product-->
+    <string name="titleDetail">Product Details</string>
+    <string name="txt_unites">units</string>
     <string name="maneProduct">Name</string>
     <string name="descProduct">description</string>
     <string name="countProduct">Quantity</string>
