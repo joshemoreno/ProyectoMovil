@@ -16,12 +16,15 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.marketplace.databinding.ActivityMenuBinding;
+import com.example.marketplace.ui.gallery.GalleryFragment;
 import com.google.android.material.navigation.NavigationBarItemView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -39,11 +42,13 @@ public class MenuActivity extends AppCompatActivity {
     private TextView tvName;
     private View hView;
     private int count=0;
+    private Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mySelf = this;
+
 
         draView = findViewById(R.id.drawer_layout);
         navView = findViewById(R.id.nav_view);
@@ -62,6 +67,9 @@ public class MenuActivity extends AppCompatActivity {
 
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
+        View headerView = navigationView.getHeaderView(0);
+        TextView textView = headerView.findViewById(R.id.navName);
+        textView.setText("Hola");
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
@@ -72,42 +80,51 @@ public class MenuActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.nav_home:
-                        Toast.makeText(MenuActivity.this, "home", Toast.LENGTH_SHORT).show();
-                        break;
-                    case R.id.nav_favorites:
-                        Toast.makeText(MenuActivity.this, "favorites", Toast.LENGTH_SHORT).show();
-                        break;
-                    case R.id.nav_shopping:
-                        Toast.makeText(MenuActivity.this, "shopping", Toast.LENGTH_SHORT).show();
-                        break;
-                    case R.id.signOut:
-                        AlertDialog.Builder builder = new AlertDialog.Builder(mySelf);
-                        builder.setTitle(R.string.logOut);
-                        builder.setMessage(R.string.sure);
-                        builder.setIcon(R.drawable.warning);
-                        builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                finish();
-                                FirebaseAuth.getInstance().signOut();
-                                Intent act_goMain = new Intent(mySelf, MainActivity.class);
-                                startActivity(act_goMain);
-                            }
-                        });
-                        builder.setNegativeButton(R.string.no,null);
 
-                        AlertDialog dialog = builder.create();
-                        dialog.show();
-                        break;
-                }
-                return true;
-            }
-        });
+
+//        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean (@NonNull @NotNull MenuItem item) {
+//                switch (item.getItemId()){
+//                    case R.id.nav_home:
+//                        Toast.makeText(MenuActivity.this, "home", Toast.LENGTH_SHORT).show();
+//                        break;
+//                    case R.id.nav_favorites:
+//                        GalleryFragment fragment2=new GalleryFragment();
+//                        FragmentManager fragmentManager=getSupportFragmentManager();
+//                        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+//                        fragmentTransaction.replace(R.id.nav_host_fragment_content_menu,fragment2,"tag");
+//                        fragmentTransaction.addToBackStack(null);
+//                        fragmentTransaction.commit();
+//
+//                        Toast.makeText(MenuActivity.this, "favorites", Toast.LENGTH_SHORT).show();
+//                        break;
+//                    case R.id.nav_shopping:
+//                        Toast.makeText(MenuActivity.this, "shopping", Toast.LENGTH_SHORT).show();
+//                        break;
+//                    case R.id.signOut:
+//                        AlertDialog.Builder builder = new AlertDialog.Builder(mySelf);
+//                        builder.setTitle(R.string.logOut);
+//                        builder.setMessage(R.string.sure);
+//                        builder.setIcon(R.drawable.warning);
+//                        builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                finish();
+//                                FirebaseAuth.getInstance().signOut();
+//                                Intent act_goMain = new Intent(mySelf, MainActivity.class);
+//                                startActivity(act_goMain);
+//                            }
+//                        });
+//                        builder.setNegativeButton(R.string.no,null);
+//
+//                        AlertDialog dialog = builder.create();
+//                        dialog.show();
+//                        break;
+//                }
+//                return true;
+//            }
+//        });
 
     }
 
@@ -117,6 +134,24 @@ public class MenuActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.nav_favorites: {
+                GalleryFragment fragment2=new GalleryFragment();
+                FragmentManager fragmentManager=getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.nav_host_fragment_content_menu,fragment2,"tag");
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+                break;
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
     @Override
     public boolean onSupportNavigateUp() {
