@@ -9,18 +9,17 @@
             android:icon="@drawable/home"
             android:title="@string/menu_home" />
         <item
-            android:id="@+id/nav_favorites"
+            android:id="@+id/nav_gallery"
             android:icon="@drawable/favorito"
-            android:title="@string/menu_favorite" />
+            android:title="Gallery" />
         <item
-            android:id="@+id/nav_shopping"
+            android:id="@+id/nav_slideshow"
             android:icon="@drawable/shopping"
-            android:title="@string/menu_cart" />
-    </group>
-    <group>
+            android:title="@string/menu_slideshow" />
+
         <item
-            android:id="@+id/signOut"
+            android:id="@+id/nav_logout"
             android:icon="@drawable/logout"
-            android:title="@string/logOut"/>
+            android:title="Logout" />
     </group>
 </menu>
