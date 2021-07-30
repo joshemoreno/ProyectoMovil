@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,9 +26,17 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.marketplace.databinding.ActivityMenuBinding;
 import com.example.marketplace.ui.gallery.GalleryFragment;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationBarItemView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -43,16 +52,19 @@ public class MenuActivity extends AppCompatActivity {
     private View hView;
     private int count=0;
     private Activity activity;
+    private String user;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mySelf = this;
-
+        db = FirebaseFirestore.getInstance();
 
         draView = findViewById(R.id.drawer_layout);
         navView = findViewById(R.id.nav_view);
 
+        Intent intent = getIntent();
         binding = ActivityMenuBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -65,11 +77,43 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
+        String email = intent.getStringExtra("email");
+
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
         View headerView = navigationView.getHeaderView(0);
         TextView textView = headerView.findViewById(R.id.navName);
-        textView.setText("Hola");
+        db.collection("users").document(email).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()){
+                    user = (String) documentSnapshot.getData().get("name");
+                    textView.setText(user);
+                }
+            }
+        });
+
+
+        navigationView.getMenu().findItem(R.id.nav_logout).setOnMenuItemClickListener(menuItem -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(mySelf);
+            builder.setTitle(R.string.logOut);
+            builder.setMessage(R.string.sure);
+            builder.setIcon(R.drawable.warning);
+            builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finish();
+                    FirebaseAuth.getInstance().signOut();
+                    Intent act_goMain = new Intent(mySelf, MainActivity.class);
+                    startActivity(act_goMain);
+                }
+            });
+            builder.setNegativeButton(R.string.no,null);
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
+            return true;
+        });
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
@@ -80,52 +124,6 @@ public class MenuActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-
-
-//        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean (@NonNull @NotNull MenuItem item) {
-//                switch (item.getItemId()){
-//                    case R.id.nav_home:
-//                        Toast.makeText(MenuActivity.this, "home", Toast.LENGTH_SHORT).show();
-//                        break;
-//                    case R.id.nav_favorites:
-//                        GalleryFragment fragment2=new GalleryFragment();
-//                        FragmentManager fragmentManager=getSupportFragmentManager();
-//                        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-//                        fragmentTransaction.replace(R.id.nav_host_fragment_content_menu,fragment2,"tag");
-//                        fragmentTransaction.addToBackStack(null);
-//                        fragmentTransaction.commit();
-//
-//                        Toast.makeText(MenuActivity.this, "favorites", Toast.LENGTH_SHORT).show();
-//                        break;
-//                    case R.id.nav_shopping:
-//                        Toast.makeText(MenuActivity.this, "shopping", Toast.LENGTH_SHORT).show();
-//                        break;
-//                    case R.id.signOut:
-//                        AlertDialog.Builder builder = new AlertDialog.Builder(mySelf);
-//                        builder.setTitle(R.string.logOut);
-//                        builder.setMessage(R.string.sure);
-//                        builder.setIcon(R.drawable.warning);
-//                        builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                finish();
-//                                FirebaseAuth.getInstance().signOut();
-//                                Intent act_goMain = new Intent(mySelf, MainActivity.class);
-//                                startActivity(act_goMain);
-//                            }
-//                        });
-//                        builder.setNegativeButton(R.string.no,null);
-//
-//                        AlertDialog dialog = builder.create();
-//                        dialog.show();
-//                        break;
-//                }
-//                return true;
-//            }
-//        });
-
     }
 
     @Override
@@ -133,23 +131,6 @@ public class MenuActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()) {
-            case R.id.nav_favorites: {
-                GalleryFragment fragment2=new GalleryFragment();
-                FragmentManager fragmentManager=getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.nav_host_fragment_content_menu,fragment2,"tag");
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
-                break;
-            }
-        }
-        return super.onOptionsItemSelected(item);
     }
 
 
