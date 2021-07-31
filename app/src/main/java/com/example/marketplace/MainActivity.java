@@ -34,7 +34,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
+            String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
             Intent act_goHome = new Intent(mySelf,MenuActivity.class);
+            act_goHome.putExtra("email",email);
             startActivity(act_goHome);
             finish();
         } else {
