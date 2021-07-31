@@ -15,7 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Marketplace"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Detail_product"
+        <activity android:name=".FavoriteActivity"></activity>
+        <activity
+            android:name=".Detail_product"
             android:label="@string/titleDetail" />
         <activity
             android:name=".activity_add_product"

@@ -93,6 +93,11 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
+        navigationView.getMenu().findItem(R.id.nav_gallery).setOnMenuItemClickListener(menuItem -> {
+            Intent favorites = new Intent(MenuActivity.this, FavoriteActivity.class);
+            startActivity(favorites);
+            return true;
+            });
 
         navigationView.getMenu().findItem(R.id.nav_logout).setOnMenuItemClickListener(menuItem -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(mySelf);

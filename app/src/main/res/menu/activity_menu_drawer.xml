@@ -11,11 +11,11 @@
         <item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/favorito"
-            android:title="Gallery" />
+            android:title="@string/menu_favorite" />
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/shopping"
-            android:title="@string/menu_slideshow" />
+            android:title="@string/menu_cart" />
 
         <item
             android:id="@+id/nav_logout"
