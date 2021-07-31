@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".loginActivity"
     android:orientation="vertical">
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="40"
+        android:layout_weight="50"
         android:baselineAligned="false"
         android:gravity="center"
         android:orientation="vertical">
@@ -32,13 +33,11 @@
             android:src="@drawable/logo"
             android:layout_marginHorizontal="@dimen/img_margin2">
         </ImageView>
-
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="60"
+        android:layout_weight="30"
         android:baselineAligned="false"
         android:gravity="center"
         android:orientation="vertical"
@@ -48,23 +47,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
-            android:hint="@string/name"
-            android:id="@+id/et_name">
-        </EditText>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:hint="@string/lastName"
-            android:id="@+id/et_lastName">
-        </EditText>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
             android:hint="@string/email"
-            android:inputType="textWebEmailAddress"
-            android:id="@+id/et_email">
+            android:id="@+id/eTemail">
         </EditText>
         <EditText
             android:layout_width="match_parent"
@@ -72,38 +56,20 @@
             android:layout_weight="2"
             android:hint="@string/password"
             android:inputType="textPassword"
-            android:id="@+id/et_password">
+            android:id="@+id/eTpassword"
+            android:layout_marginBottom="@dimen/btn_margin_button">
         </EditText>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:orientation="horizontal">
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/chk_terms">
-            </CheckBox>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/terms"
-                android:textColor="@color/blue"
-                android:id="@+id/terms"
-                android:clickable="true">
-            </TextView>
 
-        </LinearLayout>
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/btn_margin"
-            android:text="@string/sign_up"
+            android:text="@string/log_in"
             android:layout_marginBottom="@dimen/btn_margin_button"
             android:textSize="@dimen/txt_btn"
-            android:backgroundTint="@color/blue"
+            android:backgroundTint="@color/green"
             android:textColor="@color/white"
-            android:id="@+id/btn_signUp2">
+            android:id="@+id/btnLogin">
         </Button>
 
         <LinearLayout
@@ -114,15 +80,15 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/already"
+                android:text="@string/dont_have"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/blue"
-                android:id="@+id/tv_login"
+                android:id="@+id/tv_sign"
                 android:clickable="true"
-                android:text="@string/slog_in"
+                android:text="@string/ssign_up"
                 android:paddingStart="2dp"
                 android:contextClickable="true"
                 />

@@ -2,18 +2,32 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.marketplace">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Marketplace"
         android:usesCleartextTraffic="true">
-        <activity android:name=".HomeActivity"></activity>
+        <activity android:name=".Detail_product"
+            android:label="@string/titleDetail" />
+        <activity
+            android:name=".activity_add_product"
+            android:label="@string/titleAddProduct" />
+        <activity
+            android:name=".loginActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity android:name=".HomeActivity" />
+        <activity
+            android:name=".MenuActivity"
+            android:label="@string/title_activity_menu"
+            android:theme="@style/Theme.Marketplace.NoActionBar" />
         <activity
             android:name=".SignUpActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />

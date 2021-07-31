@@ -1,4 +1,6 @@
 <resources>
+    <string name="backAlert">Tap again to exit</string>
+    <string name="titleAddProduct">Add Products</string>
     <string name="app_name">Marketplace</string>
     <string name="sign_up">Sign up</string>
     <string name="log_in">Log in </string>
@@ -6,6 +8,75 @@
     <string name="lastName">Last name</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
-    <string name="terms"><u>terms and conditions</u></string>
+    <string name="terms"><u>Terms and Conditions</u></string>
+    <string name="title_activity_menu">MenuActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello">Hello</string>
+    <string name="logOut">Log Out</string>
+    <string name="sure">Are you sure you want to leave</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="tv_important">Important to read</string>
+    <string name="btn_accept">Accept</string>
+    <string name="termsc">Terms and Conditions</string>
+    <!--genericos-->
+    <string name="slog_in"><u>Log in</u> </string>
+    <string name="ssign_up"><u>Sign up</u></string>
+    <string name="btn_ok">Ok</string>
+    <string name="warning">Warning</string>
+    <string name="loading">Loading...</string>
+
+    <!--txt Signup-->
+    <string name="msg_name">Please enter a name</string>
+    <string name="msg_lastname">Please enter a last name</string>
+    <string name="msg_email">Please enter a email</string>
+    <string name="msg_password">Please enter a password</string>
+    <string name="msg_password2">The password must be at least 6 characters long</string>
+    <string name="msg_check">You must accept the terms and conditions</string>
+    <string name="msg_exist">This user is already registered</string>
+    <string name="msg_error">This user could not be registered</string>
+    <string name="msg_noExist">This user is not registered</string>
+    <string name="already">Already have an user?</string>
+    <string name="dont_have">Don\'t have an account?</string>
+
+
+    <!--    txt terms-->
+    <string name="first_line">By accepting the terms and conditions presented below, the user agrees to
+abide by all the rules for the use of this application, which include: </string>
+    <string name="second_line">Post ONLY true content.</string>
+    <string name="third_line">Use real means of payment.</string>
+    <string name="fourth_line">Not accepting the terms mentioned here means not being able to use the application. </string>
+    <string name="last_line">Comply with the necessary age in your country of residence to be able to make virtual purchases and sales.</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_cart">Shopping cart</string>
+    <string name="menu_favorite">Favorites</string>
+    <string name="menu_slideshow">Slideshow</string>
+
+
+    <!--txt product-->
+    <string name="titleDetail">Product Details</string>
+    <string name="txt_unites">units</string>
+    <string name="maneProduct">Name</string>
+    <string name="descProduct">description</string>
+    <string name="countProduct">Quantity</string>
+    <string name="priceProduct">Price</string>
+    <string name="btnImageProduct">Upload</string>
+    <string name="btn_add">Save</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="msg_info">Success</string>
+    <string name="msg_createProduct">The product was added</string>
+
+    <string name="msg_nameProduct">Please enter a name</string>
+    <string name="msg_descProduct">Please enter a description</string>
+    <string name="msg_countProduct">Please enter a quantity</string>
+    <string name="msg_priceProduct">Please enter a price</string>
+    <string name="msg_imageProduct">Please enter a image</string>
+    <string name="msg_successProduct">The product was created</string>
 
 </resources>
