@@ -1,7 +1,5 @@
 package com.example.marketplace.model;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class Product {
@@ -11,15 +9,19 @@ public class Product {
     private String price;
     private String quantity;
     private String url;
+    private String latitude;
+    private String longitude;
     private boolean favorite;
 
 
-    public Product(String name, String description, String price, String quantity, String url) {
+    public Product(String name, String description, String price, String quantity, String url, String latitude, String longitude) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.quantity = quantity;
         this.url = url;
+        this.latitude = latitude;
+        this.longitude = longitude;
         favorite = false;
     }
 
@@ -47,6 +49,10 @@ public class Product {
         return url;
     }
 
+    public String getLatitude () {return latitude;}
+
+    public String getLongitude() {return longitude;}
+
     public boolean isFavorite() {
         return favorite;
     }
@@ -67,4 +73,6 @@ public class Product {
     public int hashCode() {
         return Objects.hash(name);
     }
+
+
 }
