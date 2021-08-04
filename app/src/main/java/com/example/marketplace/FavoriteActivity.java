@@ -1,15 +1,14 @@
 package com.example.marketplace;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.marketplace.adapter.ProductAdapter;
-import com.example.marketplace.model.Favorite;
 import com.example.marketplace.model.ManagementFavorites;
 import com.example.marketplace.model.Product;
 
@@ -41,6 +40,8 @@ public class FavoriteActivity extends AppCompatActivity {
                 act_goDetail.putExtra("price",list.get(rv_list.getChildAdapterPosition(v)).getPrice());
                 act_goDetail.putExtra("quantity",list.get(rv_list.getChildAdapterPosition(v)).getQuantity());
                 act_goDetail.putExtra("url",list.get(rv_list.getChildAdapterPosition(v)).getUrl());
+                act_goDetail.putExtra("latitude",list.get(rv_list.getChildAdapterPosition(v)).getLatitude());
+                act_goDetail.putExtra("longitude", list.get(rv_list.getChildAdapterPosition(v)).getLongitude());
                 startActivity(act_goDetail);
             }
         });

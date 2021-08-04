@@ -115,6 +115,20 @@
                     android:justificationMode="inter_word">
                 </TextView>
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/txt_paragraph"
+                    android:layout_marginHorizontal="@dimen/txt_subtitle"
+                    android:layout_marginVertical="@dimen/txt_paragraph"
+                    android:justificationMode="inter_word"
+                    android:text="@string/seller"
+                    android:gravity="center_horizontal"
+                    android:textColor="@color/blue"
+                    android:textAllCaps="true"
+                    android:clickable="true"
+                    android:id="@+id/tv_location"/>
+
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>

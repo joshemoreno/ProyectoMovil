@@ -1,9 +1,5 @@
 package com.example.marketplace;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,6 +10,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -31,14 +32,16 @@ public class activity_add_product extends AppCompatActivity {
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     LoadinDialog loadinDialog = new LoadinDialog(activity_add_product.this);
+    static final int MAP_REQUEST = 1;
 
     private FirebaseAuth mAuth;
     private StorageReference mStorage;
-    private EditText et_name, et_description, et_quantity, et_price;
+    private EditText et_name, et_description, et_quantity, et_price, et_lat, et_lon;
     private Button btnSave, btnCancel, btnUpload;
     private ImageView uploadImage;
     private Activity mySelf;
     private Uri globalPath;
+    private TextView tv_setloc;
 
 
     private String nameProduct = "";
@@ -46,7 +49,8 @@ public class activity_add_product extends AppCompatActivity {
     private String quantity = "";
     private String price = "";
     private Task<Uri> imagePath;
-
+    private String latitude = "";
+    private String longitude = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +67,18 @@ public class activity_add_product extends AppCompatActivity {
         btnUpload = findViewById(R.id.btn_upLoad);
         btnCancel = findViewById(R.id.btn_cancel);
         uploadImage = findViewById(R.id.imageProduct);
+        et_lat = findViewById(R.id.et_lat);
+        et_lon = findViewById(R.id.et_lon);
+        tv_setloc = findViewById(R.id.tv_setloc);
         mySelf = this;
+
+        tv_setloc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent map = new Intent(mySelf,MapActivity1.class);
+                startActivityForResult(map, MAP_REQUEST);
+            }
+        });
 
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,6 +104,8 @@ public class activity_add_product extends AppCompatActivity {
                 description = et_description.getText().toString().trim();
                 quantity =  et_quantity.getText().toString().trim();
                 price = et_price.getText().toString().trim();
+                latitude = et_lat.getText().toString().trim();
+                longitude = et_lon.getText().toString().trim();
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(mySelf);
                 builder.setTitle(R.string.warning);
@@ -115,7 +132,16 @@ public class activity_add_product extends AppCompatActivity {
                     builder.setMessage(R.string.msg_imageProduct);
                     AlertDialog dialog = builder.create();
                     dialog.show();
-                }else{
+                } else if (latitude.isEmpty()){
+                    builder.setMessage(R.string.msg_locationProduct);
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                } else if (longitude.isEmpty()){
+                builder.setMessage(R.string.msg_locationProduct);
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+                else{
                     loadinDialog.startLoading();
                     createProduct();
                 }
@@ -144,6 +170,8 @@ public class activity_add_product extends AppCompatActivity {
                 product.put("price", price);
                 product.put("url", downloadUri.toString());
                 product.put("user",id);
+                product.put("latitude",latitude);
+                product.put("longitude", longitude);
 
                 db.collection("products")
                         .add(product)
@@ -180,10 +208,20 @@ public class activity_add_product extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK){
-            Uri path=data.getData();
+        if (requestCode == MAP_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                assert data != null;
+                String lati = data.getStringExtra("lat");
+                String longi = data.getStringExtra("lon");
+                et_lat.setText(lati);
+                et_lon.setText(longi);
+            }
+        }
+        else {if (resultCode == RESULT_OK) {
+            Uri path = data.getData();
             uploadImage.setImageURI(path);
             globalPath = path;
         }
     }
+}
 }

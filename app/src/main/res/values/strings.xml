@@ -29,7 +29,7 @@
     <string name="ssign_up"><u>Sign up</u></string>
     <string name="btn_ok">Ok</string>
     <string name="warning">Warning</string>
-    <string name="loading">Loading...</string>
+    <string name="loading">Loading…</string>
 
     <!--txt Signup-->
     <string name="msg_name">Please enter a name</string>
@@ -73,16 +73,21 @@ abide by all the rules for the use of this application, which include: </string>
     <string name="btn_cancel">Cancel</string>
     <string name="msg_info">Success</string>
     <string name="msg_createProduct">The product was added</string>
-
+    <string name="location"><u>Set location</u></string>
+    <string name="lat">Latitude</string>
+    <string name="lon">Longitude</string>
+    <string name="seller"><u>See seller\'s location</u></string>
     <string name="msg_nameProduct">Please enter a name</string>
     <string name="msg_descProduct">Please enter a description</string>
     <string name="msg_countProduct">Please enter a quantity</string>
     <string name="msg_priceProduct">Please enter a price</string>
     <string name="msg_imageProduct">Please enter a image</string>
+    <string name="msg_locationProduct">Please set a location</string>
     <string name="msg_successProduct">The product was created</string>
     <string name="msg_addProduct">The product was added</string>
     <string name="btn_buy">Buy</string>
     <string name="product_empty">You don\'t have any added products yet</string>
+    <string name="title_activity_maps">Map</string>
 
 
 </resources>
