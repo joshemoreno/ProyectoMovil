@@ -69,13 +69,13 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.appBarMenu.toolbar);
-        binding.appBarMenu.btnAddProduct.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent act_goMain = new Intent(mySelf, activity_add_product.class);
-                startActivity(act_goMain);
-            }
-        });
+//        binding.appBarMenu.btnAddProduct.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent act_goMain = new Intent(mySelf, activity_add_product.class);
+//                startActivity(act_goMain);
+//            }
+//        });
 
         String email = intent.getStringExtra("email");
 

@@ -90,6 +90,7 @@
                 </TextView>
 
                 <ImageView
+                    android:id="@+id/addCart"
                     android:layout_width="35dp"
                     android:layout_height="wrap_content"
                     android:clickable="true"

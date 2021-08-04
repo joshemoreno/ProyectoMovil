@@ -41,6 +41,8 @@
     <string name="msg_exist">This user is already registered</string>
     <string name="msg_error">This user could not be registered</string>
     <string name="msg_noExist">This user is not registered</string>
+    <string name="msg_wrongPasswd">The password or user is invalid</string>
+    <string name="msg_invalidEmail">The email address is badly formatted</string>
     <string name="already">Already have an user?</string>
     <string name="dont_have">Don\'t have an account?</string>
 
@@ -78,5 +80,9 @@ abide by all the rules for the use of this application, which include: </string>
     <string name="msg_priceProduct">Please enter a price</string>
     <string name="msg_imageProduct">Please enter a image</string>
     <string name="msg_successProduct">The product was created</string>
+    <string name="msg_addProduct">The product was added</string>
+    <string name="btn_buy">Buy</string>
+    <string name="product_empty">You don\'t have any added products yet</string>
+
 
 </resources>

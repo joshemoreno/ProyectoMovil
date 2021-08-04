@@ -18,7 +18,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.marketplace.Detail_product;
+import com.example.marketplace.activity_add_product;
 import com.example.marketplace.adapter.ProductAdapter;
+import com.example.marketplace.databinding.FragmentSlideshowBinding;
 import com.example.marketplace.model.Favorite;
 import com.example.marketplace.model.ManagementFavorites;
 import com.example.marketplace.model.Product;
@@ -26,6 +28,7 @@ import com.example.marketplace.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -33,6 +36,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import org.jetbrains.annotations.NotNull;
 
+import java.security.PrivateKey;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +48,7 @@ public class HomeFragment extends Fragment {
     private ArrayList<Product> list;
     private FirebaseFirestore db;
     private ProductAdapter productAdapter;
+    private FloatingActionButton btnAdd;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -64,6 +69,7 @@ public class HomeFragment extends Fragment {
                 Favorite favorite = ManagementFavorites.getFavorite(getContext());
                 for (QueryDocumentSnapshot document: queryDocumentSnapshots){
                     Product temp = document.toObject(Product.class);
+                    temp.setId(document.getId());
                     temp.setFavorite(favorite.getFavorites().contains(temp));
                     list.add(temp);
                 }
@@ -95,6 +101,16 @@ public class HomeFragment extends Fragment {
                 });
             }
         });
+
+        btnAdd = root.findViewById(R.id.btnAddProduct);
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent act_goMain = new Intent(getActivity(), activity_add_product.class);
+                startActivity(act_goMain);
+            }
+        });
+
         return root;
     }
 
