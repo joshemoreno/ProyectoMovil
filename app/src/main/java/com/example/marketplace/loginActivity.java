@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -16,6 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
 
 public class loginActivity extends AppCompatActivity {
 
@@ -93,12 +95,14 @@ public class loginActivity extends AppCompatActivity {
                             loadinDialog.dismissDialog();
                             finish();
                             Intent act_goHome = new Intent(mySelf,MenuActivity.class);
+                            act_goHome.putExtra("email",email);
                             startActivity(act_goHome);
-                        } else {
+                        } else if(!task.isSuccessful()){
                             loadinDialog.dismissDialog();
-                            builder.setMessage(R.string.msg_noExist);
-                            AlertDialog dialog = builder.create();
-                            dialog.show();
+                            String errorCode = task.getException().getMessage();
+                            builder.setMessage(errorCode);
+                            AlertDialog dialog3 = builder.create();
+                            dialog3.show();
                         }
                     }
                 });

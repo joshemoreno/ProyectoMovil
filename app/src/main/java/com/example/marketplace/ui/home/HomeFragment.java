@@ -1,14 +1,10 @@
 package com.example.marketplace.ui.home;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,26 +12,30 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.marketplace.Detail_product;
+import com.example.marketplace.activity_add_product;
+import com.example.marketplace.R;
 import com.example.marketplace.adapter.ProductAdapter;
+import com.example.marketplace.databinding.FragmentSlideshowBinding;
 import com.example.marketplace.model.Favorite;
 import com.example.marketplace.model.ManagementFavorites;
 import com.example.marketplace.model.Product;
-import com.example.marketplace.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
 import org.jetbrains.annotations.NotNull;
 
+import java.security.PrivateKey;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class HomeFragment extends Fragment {
@@ -44,6 +44,7 @@ public class HomeFragment extends Fragment {
     private ArrayList<Product> list;
     private FirebaseFirestore db;
     private ProductAdapter productAdapter;
+    private FloatingActionButton btnAdd;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -64,6 +65,7 @@ public class HomeFragment extends Fragment {
                 Favorite favorite = ManagementFavorites.getFavorite(getContext());
                 for (QueryDocumentSnapshot document: queryDocumentSnapshots){
                     Product temp = document.toObject(Product.class);
+                    temp.setId(document.getId());
                     temp.setFavorite(favorite.getFavorites().contains(temp));
                     list.add(temp);
                 }
@@ -81,6 +83,8 @@ public class HomeFragment extends Fragment {
                         act_goDetail.putExtra("price",list.get(rv_list.getChildAdapterPosition(v)).getPrice());
                         act_goDetail.putExtra("quantity",list.get(rv_list.getChildAdapterPosition(v)).getQuantity());
                         act_goDetail.putExtra("url",list.get(rv_list.getChildAdapterPosition(v)).getUrl());
+                        act_goDetail.putExtra("latitude",list.get(rv_list.getChildAdapterPosition(v)).getLatitude());
+                        act_goDetail.putExtra("longitude", list.get(rv_list.getChildAdapterPosition(v)).getLongitude());
                         startActivity(act_goDetail);
                     }
                 });
@@ -95,6 +99,16 @@ public class HomeFragment extends Fragment {
                 });
             }
         });
+
+        btnAdd = root.findViewById(R.id.btnAddProduct);
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent act_goMain = new Intent(getActivity(), activity_add_product.class);
+                startActivity(act_goMain);
+            }
+        });
+
         return root;
     }
 
