@@ -18,7 +18,7 @@ public class Product {
 
 
 
-    public Product(String name, String description, String price, String quantity, String url, String latitude, String longitude, String id)) {
+    public Product(String name, String description, String price, String quantity, String url, String latitude, String longitude, String id) {
         this.name = name;
         this.description = description;
         this.price = price;
