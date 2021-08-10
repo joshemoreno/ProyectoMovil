@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity_add_product"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="30">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/camera"
+            android:padding="20dp"
+            android:id="@+id/imageProduct">
+        </ImageView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/btn_margin"
+            android:text="@string/btnImageProduct"
+            android:textSize="@dimen/txt_btn600"
+            android:backgroundTint="@color/blue"
+            android:textColor="@color/white"
+            android:id="@+id/btn_upLoad">
+        </Button>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="40"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="@dimen/txt_margin2">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/txt_paragraph600"
+            android:hint="@string/maneProduct"
+            android:id="@+id/et_maneProduct">
+        </EditText>
+        <EditText
+            android:layout_width="match_parent"
+            android:textSize="@dimen/txt_paragraph600"
+            android:layout_height="wrap_content"
+            android:hint="@string/descProduct"
+            android:id="@+id/et_descProduct">
+        </EditText>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/countProduct"
+            android:textSize="@dimen/txt_paragraph600"
+            android:id="@+id/et_countProduct"
+            android:inputType="number">
+        </EditText>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="10"
+                android:layout_height="match_parent"
+                android:text="$"
+                android:gravity="center"
+                android:textSize="@dimen/txt_paragraph600">
+            </TextView>
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_weight="90"
+                android:layout_height="wrap_content"
+                android:hint="@string/priceProduct"
+                android:id="@+id/priceProduct"
+                android:inputType="number"
+                android:textSize="@dimen/txt_paragraph600">
+            </EditText>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="50"
+                android:text="@string/location"
+                android:textSize="@dimen/txt_paragraph600"
+                android:textColor="@color/blue"
+                android:gravity="center_horizontal"
+                android:clickable="true"
+                android:id="@+id/tv_setloc"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="50"
+                    android:hint="@string/lat"
+                    android:id="@+id/et_lat"
+                    android:textSize="@dimen/txt_paragraph600"/>
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="50"
+                    android:hint="@string/lon"
+                    android:id="@+id/et_lon"
+                    android:textSize="@dimen/txt_paragraph600"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:layout_width="0dp"
+                android:layout_weight="50"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:text="@string/btn_cancel"
+                android:backgroundTint="@color/red"
+                android:id="@+id/btn_cancel"
+                android:textSize="@dimen/txt_btn600">
+            </Button>
+            <Button
+                android:layout_width="0dp"
+                android:layout_weight="50"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:text="@string/btn_add"
+                android:backgroundTint="@color/green"
+                android:id="@+id/btn_save"
+                android:textSize="@dimen/txt_btn600">
+            </Button>
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>
