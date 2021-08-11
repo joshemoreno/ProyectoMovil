@@ -72,4 +72,5 @@
     <string name="btn_buy">Comprar</string>
     <string name="product_empty">Todavía no tiene ningún producto añadido</string>
     <string name="title_activity_maps">Mapa</string>
+    <string name="back">Regresar</string>
 </resources>
