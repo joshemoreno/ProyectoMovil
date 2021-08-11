@@ -6,7 +6,10 @@
     <dimen name="txt_subtitle">25dp</dimen>
     <dimen name="txt_btn">20dp</dimen>
     <dimen name="txt_paragraph">15dp</dimen>
-
+    <dimen name="txt_btn600">40dp</dimen>
+    <dimen name="txt_paragraph600">30dp</dimen>
+    <dimen name="txt_title600">60dp</dimen>
+    <dimen name="txt_subtitle600">50dp</dimen>
     <!-- Margins. -->
     <dimen name="img_margin">130dp</dimen>
     <dimen name="txt_margin">80dp</dimen>
